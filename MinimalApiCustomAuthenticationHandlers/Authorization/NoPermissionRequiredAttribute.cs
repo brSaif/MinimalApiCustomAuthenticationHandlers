@@ -1,3 +1,5 @@
+namespace MinimalApiCustomAuthenticationHandlers.Authorization;
+
 /// <summary>
 /// Represents the <see cref="NoPermissionRequiredAttribute"/> attribute.
 /// </summary>

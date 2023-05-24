@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
+namespace MinimalApiCustomAuthenticationHandlers.Authorization;
+
 /// <summary>
 /// Represents the <see cref="HasPermissionAttribute"/> Authorize Attribute.
 /// </summary>

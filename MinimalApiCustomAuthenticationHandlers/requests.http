@@ -1,0 +1,19 @@
+### Get All claims for the currently signed-in user otherwise it returns []
+GET http://localhost:5057/
+
+### Sign-in a user through minimal cookie based authentication
+GET http://localhost:5057/sign-in
+
+### In the following i am using a routing group **You need to call the /sign-in endpoint first**
+### Get request to /hell/dente endpoint which is using 'RequirePermission(UserPermissions.AcceptMyGreetings)' attribute
+GET http://localhost:5057/hell/dente
+    
+### Get request to /hell/abu-al-alaa endpoint which is using 'RequireNoPermission()' attribute
+GET http://localhost:5057/hell/Abu-al-alaa
+
+### Get request to /hell/gb endpoint which is using 'RequirePermission(UserPermissions.GreetMeBack)' attribute
+GET http://localhost:5057/hell/gb
+
+### Post request to /hell/make-silly-jokes endpoint which is using 'RequirePermission(UserPermissions.MakeSillyJokes)' attribute
+GET http://localhost:5057/hell/make-silly-jokes?request=well-its-up-to-you-now
+
