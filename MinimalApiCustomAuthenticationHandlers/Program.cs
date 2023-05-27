@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MinimalApiCustomAuthenticationHandlers.Authorization;
-using MinimalApiCustomAuthenticationHandlers.Authorization.Auth;
 using MinimalApiCustomAuthenticationHandlers.Endpoints.Dummy;
 using MinimalApiCustomAuthenticationHandlers.Extensions;
 
@@ -31,19 +30,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(
 
 builder.Services.AddAuthentication();
 
+// If we want to override the microsoft 'AuthorizationHandler' and use our own 'AttributeAuthorizationHandler'.
+builder.Services.AddScoped<IAuthorizationHandler, HasPermissionAuthorizationHandler>();
+
 builder.Services.AddAuthorization(o =>
 {
-    // o.DefaultPolicy = new AuthorizationPolicyBuilder()
-    //     .AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
-    //     .RequireClaim("role", "AcceptMyGreetings")
-    //     .Build();
-
+    
     o.AddPolicy(HasPermissionAttribute.HasPermissionPolicyName, policyBuilder =>
     {
-        policyBuilder.Requirements.Add(new HasPermissionAuthorizationRequirement());
+        policyBuilder.AddRequirements(new HasPermissionAuthorizationRequirement());
         policyBuilder.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme);
-        // policyBuilder.RequireAuthenticatedUser();
-        // policyBuilder.RequireClaim("role", "AcceptMyGreetings");
     });
 });
 
